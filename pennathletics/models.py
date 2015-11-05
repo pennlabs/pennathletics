@@ -13,4 +13,4 @@ class Athlete(object):
         self.hometown = hometown
 
     def __repr__(self):
-        print("<Athlete #{} {}".format(self.no, self.name))
+        print("<Athlete #{}, {},".format(self.no, self.name))
