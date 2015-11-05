@@ -1,5 +1,5 @@
 __title__ = 'pennathletics'
 __version__ = '0.0.1'
-__author__ = 'Adel Qalieh'
+__author__ = 'Adel Qalieh, Andrew Fischer'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Penn Labs'
