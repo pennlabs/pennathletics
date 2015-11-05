@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import models
 import re
 
 SPORTS = {
@@ -130,15 +131,22 @@ def getRoster(sport, year):
     """Return a roster of players.
     :param sport: string value of sport.
     """
+    roster = []
     r = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'],SPORTS[sport]['SPSID'],year))
     parsed = BeautifulSoup(r.text, "html.parser")
-    info_table = parsed.find_all('table')[2]
+    info_table = parsed.find_all('table')[2].find_all('tr')
     
+    for row in info_table:
+        data = [ row.find_all('td') for td in row ][0] # Get all table data
+        parsed = [ td.decode_contents(formatter="html").strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
+        parsed[1] = BeautifulSoup(parsed[1]).text # the player name is nested.
+        roster.append(parsed)
+    
+    roster = roster[7:] # remove header crap
 
-    # print(parsed)
-    # print(ROSTER_URL.format(SPORTS[sport]['SPID'],SPORTS[sport]['SPSID'],year))
-    print(info_table)
+    print(roster)
+    return roster
 
     
 # print(SPORTS['W_Swimming']['SPID'])
-getRoster('W_Basketball',2015)
+getRoster('M_Basketball',2015)
