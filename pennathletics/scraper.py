@@ -125,6 +125,8 @@ SPORTS = {
 
 ROSTER_URL = 'http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
 
+GAMES_URL = 'http://www.pennathletics.com/SportSelect.dbml?SPSID={}&SPID={}&DB_OEM_ID=1700&Q_SEASON={}'
+
 # requests.get("http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID=540&SPSID=8650")
 
 def getRoster(sport, year):
@@ -147,6 +149,29 @@ def getRoster(sport, year):
     print(roster)
     return roster
 
+def getSchedule(sport, year):
+    """Return the schedule of given year.
+    :param sport: string value of sport.
+    """
+    gameData = []
+    r = requests.get(GAMES_URL.format(SPORTS[sport]['SPSID']-1,SPORTS[sport]['SPID'],year))
+    parsed = BeautifulSoup(r.text, "html.parser")
+    info_table = parsed.find_all('table')[1].find_all('tr')
+
+    for row in info_table: 
+	data = [row.find_all('td') for td in row][0]
+	parsed = [td.decode_contents(formatter="html").strip().replace(u'&nbsp;','') for td in data]
+	if len(parsed) > 1:
+	    for i in range(0, len(parsed)-1):
+	    	parsed[i] = BeautifulSoup(parsed[i]).text.strip()#.decode_contents(formatter='html')
+	    	#if i == 5 or i == 6 or i == 7:
+		#    parsed[i] = parsed[i].text.strip()
+	    parsed.pop(len(parsed)-1)
+	    gameData.append(parsed)
+
+
+    print(gameData)
+    return gameData
     
 # print(SPORTS['W_Swimming']['SPID'])
-getRoster('M_Basketball',2015)
+getSchedule('M_Basketball', 2012)
