@@ -127,9 +127,10 @@ ROSTER_URL = 'http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID
 
 # requests.get("http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID=540&SPSID=8650")
 
-def getRoster(sport, year):
-    """Return a roster of players.
+def scrapeRoster(sport, year):
+    """Returns a list of lists contianing individual player information for a team.
     :param sport: string value of sport.
+    :param year: 4 digit int of year.
     """
     roster = []
     r = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'],SPORTS[sport]['SPSID'],year))
@@ -138,15 +139,15 @@ def getRoster(sport, year):
     
     for row in info_table:
         data = [ row.find_all('td') for td in row ][0] # Get all table data
-        parsed = [ td.decode_contents(formatter="html").strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
-        parsed[1] = BeautifulSoup(parsed[1]).text # the player name is nested.
+        parsed = [ td.decode_contents(formatter='html').strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
+        parsed[1] = BeautifulSoup(parsed[1], "html.parser").text # the player name is nested.
         roster.append(parsed)
     
     roster = roster[7:] # remove header crap
 
-    print(roster)
+    # print(roster)
     return roster
 
     
 # print(SPORTS['W_Swimming']['SPID'])
-getRoster('M_Basketball',2015)
+scrapeRoster('M_Basketball',2015)
