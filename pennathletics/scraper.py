@@ -129,7 +129,7 @@ GAMES_URL = 'http://www.pennathletics.com/SportSelect.dbml?SPSID={}&SPID={}&DB_O
 
 # requests.get("http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID=540&SPSID=8650")
 
-def getRoster(sport, year):
+def scrapeRoster(sport, year):
     """Return a roster of players.
     :param sport: string value of sport.
     """
@@ -146,7 +146,7 @@ def getRoster(sport, year):
     
     roster = roster[7:] # remove header crap
 
-    print(roster)
+    #print(roster)
     return roster
 
 def getSchedule(sport, year):

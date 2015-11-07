@@ -35,7 +35,6 @@ def parse_date_in_schedule(dayAndMonth, time, year):
     """
     
     date_object = datetime.strptime('{}{}{}{}{}{}'.format(dayAndMonth[5:], " ", str(year), " ", time[0:4], time[5:7]), '%b %d %Y %I:%M%p')
-    print date_object
     return date_object
 
 
