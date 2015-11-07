@@ -19,4 +19,7 @@ def getRoster(sport, year):
     # print(roster)
     return roster
     
+def getPlayer(sport, year, params):
+    
+    
 getRoster('M_Basketball',2015);
