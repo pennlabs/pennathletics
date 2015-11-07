@@ -163,15 +163,14 @@ def getSchedule(sport, year):
 	parsed = [td.decode_contents(formatter="html").strip().replace(u'&nbsp;','') for td in data]
 	if len(parsed) > 1:
 	    for i in range(0, len(parsed)-1):
-	    	parsed[i] = BeautifulSoup(parsed[i]).text.strip()#.decode_contents(formatter='html')
-	    	#if i == 5 or i == 6 or i == 7:
-		#    parsed[i] = parsed[i].text.strip()
+	    	parsed[i] = BeautifulSoup(parsed[i]).text.strip()
 	    parsed.pop(len(parsed)-1)
 	    gameData.append(parsed)
-
-
-    print(gameData)
     return gameData
     
-# print(SPORTS['W_Swimming']['SPID'])
+
+
+
+
+
 getSchedule('M_Basketball', 2012)
