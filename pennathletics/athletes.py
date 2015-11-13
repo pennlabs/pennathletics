@@ -16,7 +16,6 @@ def get_roster(sport, year):
             person[5],
             parse.parse_hometown(person[6]))
         )
-    #print(roster)
     return roster
     
 def get_player(sport, year, name = "", no = -1):
@@ -37,9 +36,7 @@ def get_player(sport, year, name = "", no = -1):
 	
 	if (name == "" or name == potential_list[i].name) and (no == -1 or passed_num == no) and (no >= 0 or name is not ""):
 	    list_to_return.append(potential_list[i])
-	    #print(index_in_list)
             index_in_list += 1
-    #print(list_to_return)
     return list_to_return
     
 
