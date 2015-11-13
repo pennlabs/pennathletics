@@ -23,7 +23,7 @@ def parse_hometown(hometown_str):
     >>> parse_hometown("Newport Beach, Calif. (Orange Lutheran)")
     Home(town="Newport Beach, Calif.", school="Orange Lutheran")
     """
-    town, school = hometown_str.split("(")
+    town, school = hometown_str.split("(")[:2]
     return Home(town[:-1], school[:-1])
 
 def parse_date_in_schedule(dayAndMonth, time, year):
