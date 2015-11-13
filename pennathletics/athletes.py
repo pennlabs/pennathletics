@@ -2,9 +2,9 @@ from __future__ import print_function #PYTHON 3 BABY
 import models, parse
 import scraper as s
 
-def getRoster(sport, year):
+def get_roster(sport, year):
     roster = []
-    raw = s.scrapeRoster(sport, year)
+    raw = s.scrape_roster(sport, year)
     for person in raw:
         roster.append(
             models.Athlete(
@@ -19,10 +19,10 @@ def getRoster(sport, year):
     #print(roster)
     return roster
     
-def getPlayer(sport, year, name = "", no = -1):
+def get_player(sport, year, name = "", no = -1):
     """Returns players with given attributes. *Sport and Year are required"""
     
-    potential_list = getRoster(sport, year)
+    potential_list = get_roster(sport, year)
     list_to_return = [] 
     index_in_list = 0
     passed_num = 0 
@@ -44,5 +44,4 @@ def getPlayer(sport, year, name = "", no = -1):
     
 
 
-getPlayer('M_Basketball',2015, no = 1);
 

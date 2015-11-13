@@ -129,9 +129,10 @@ GAMES_URL = 'http://www.pennathletics.com/SportSelect.dbml?SPSID={}&SPID={}&DB_O
 
 # requests.get("http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID=540&SPSID=8650")
 
-def scrapeRoster(sport, year):
-    """Return a roster of players.
+def scrape_roster(sport, year):
+    """Returns a list of lists contianing individual player information for a team.
     :param sport: string value of sport.
+    :param year: 4 digit int of year.
     """
     roster = []
     r = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'],SPORTS[sport]['SPSID'],year))
@@ -140,16 +141,15 @@ def scrapeRoster(sport, year):
     
     for row in info_table:
         data = [ row.find_all('td') for td in row ][0] # Get all table data
-        parsed = [ td.decode_contents(formatter="html").strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
-        parsed[1] = BeautifulSoup(parsed[1]).text # the player name is nested.
+        parsed = [ td.decode_contents(formatter='html').strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
+        parsed[1] = BeautifulSoup(parsed[1], "html.parser").text # the player name is nested.
         roster.append(parsed)
     
     roster = roster[7:] # remove header crap
 
-    #print(roster)
     return roster
 
-def getSchedule(sport, year):
+def get_schedule(sport, year):
     """Return the schedule of given year.
     :param sport: string value of sport.
     """
@@ -169,8 +169,3 @@ def getSchedule(sport, year):
     return gameData
     
 
-
-
-
-
-getSchedule('M_Basketball', 2012)
