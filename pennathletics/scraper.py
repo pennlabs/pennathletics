@@ -127,7 +127,7 @@ ROSTER_URL = 'http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID
 
 # requests.get("http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID=540&SPSID=8650")
 
-def scrapeRoster(sport, year):
+def scrape_roster(sport, year):
     """Returns a list of lists contianing individual player information for a team.
     :param sport: string value of sport.
     :param year: 4 digit int of year.
@@ -150,4 +150,4 @@ def scrapeRoster(sport, year):
 
     
 # print(SPORTS['W_Swimming']['SPID'])
-scrapeRoster('M_Basketball',2015)
+scrape_roster('M_Basketball',2015)
