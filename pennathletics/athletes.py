@@ -18,7 +18,7 @@ def get_roster(sport, year):
         )
     return roster
     
-def get_player(sport, year, name = "", no = -1):
+def get_player(sport, year, name="", no=-1):
     """Returns players with given attributes. *Sport and Year are required"""
     
     potential_list = get_roster(sport, year)

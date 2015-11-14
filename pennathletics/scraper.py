@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import models
-import re
 
 SPORTS = {
     'M_Baseball' : {
@@ -135,16 +133,16 @@ def scrape_roster(sport, year):
     :param year: 4 digit int of year.
     """
     roster = []
-    r = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'],SPORTS[sport]['SPSID'],year))
-    parsed = BeautifulSoup(r.text, "html.parser")
+    r          = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'], SPORTS[sport]['SPSID'],year))
+    parsed     = BeautifulSoup(r.text, "html.parser")
     info_table = parsed.find_all('table')[2].find_all('tr')
-    
+
     for row in info_table:
-        data = [ row.find_all('td') for td in row ][0] # Get all table data
-        parsed = [ td.decode_contents(formatter='html').strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
+        data      = [row.find_all('td') for td in row][0] # Get all table data
+        parsed    = [td.decode_contents(formatter='html').strip().replace(u'&nbsp;', '') for td in data] #put it in lists, strip extraneous html
         parsed[1] = BeautifulSoup(parsed[1], "html.parser").text # the player name is nested.
         roster.append(parsed)
-    
+
     roster = roster[7:] # remove header crap
 
     return roster
@@ -152,20 +150,22 @@ def scrape_roster(sport, year):
 def get_schedule(sport, year):
     """Return the schedule of given year.
     :param sport: string value of sport.
+    :param year: 4 digitinteger value of year.
     """
-    gameData = []
-    r = requests.get(GAMES_URL.format(SPORTS[sport]['SPSID']-1,SPORTS[sport]['SPID'],year))
-    parsed = BeautifulSoup(r.text, "html.parser")
-    info_table = parsed.find_all('table')[1].find_all('tr')
-
-    for row in info_table: 
-	data = [row.find_all('td') for td in row][0]
-	parsed = [td.decode_contents(formatter="html").strip().replace(u'&nbsp;','') for td in data]
-	if len(parsed) > 1:
-	    for i in range(0, len(parsed)-1):
-	    	parsed[i] = BeautifulSoup(parsed[i]).text.strip()
-	    parsed.pop(len(parsed)-1)
-	    gameData.append(parsed)
+    gameData   = []
+    r          = requests.get(
+                    GAMES_URL.format(SPORTS[sport]['SPSID']-1, 
+                    SPORTS[sport]['SPID'], 
+                    year)
+                 )
+    parsed     = BeautifulSoup(r.text, "html.parser")
+    info_table = parsed.find_all('table')[0].find_all('tr')
+    for row in info_table:
+        data   = [row.find_all('td') for td in row][0]
+        parsed = [td.decode_contents(formatter="html").strip().replace(u'&nbsp;', '') for td in data]
+        if len(parsed) > 1:
+            for i in range(0, len(parsed)-1):
+                print (i, len(parsed))
+                parsed[i] = BeautifulSoup(parsed[i]).decode_contents(formatter="html").strip()
+                gameData.append(parsed)
     return gameData
-    
-
