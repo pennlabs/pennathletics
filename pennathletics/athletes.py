@@ -23,22 +23,18 @@ def get_player(sport, year, name = "", no = -1):
     
     potential_list = get_roster(sport, year)
     list_to_return = [] 
-    index_in_list = 0
-    passed_num = 0 
+    index_in_list  = 0
+    passed_num     = 0 
 
     for i in range(0, len(potential_list)):
-	
-	
-    	if potential_list[i].no == '':
-	    passed_num = ''
- 	else: 
-	    passed_num = int(potential_list[i].no) 
-	
-	if (name == "" or name == potential_list[i].name) and (no == -1 or passed_num == no) and (no >= 0 or name is not ""):
-	    list_to_return.append(potential_list[i])
-            index_in_list += 1
+        if potential_list[i].no == '':
+            passed_num = ''
+        else: 
+    	    passed_num = int(potential_list[i].no)
+
+        if ((name == "" or name == potential_list[i].name) & 
+            (no == -1 or passed_num == no) & 
+            (no >= 0 or name != "")):
+                list_to_return.append(potential_list[i])
+        index_in_list += 1
     return list_to_return
-    
-
-
-
