@@ -5,6 +5,7 @@ import scraper as s
 def get_roster(sport, year):
     roster = []
     raw = s.scrape_roster(sport, year)
+    # return [Athlete(player) for player in raw]
     for person in raw:
         roster.append(
             models.Athlete(

@@ -144,10 +144,37 @@ def scrape_roster(sport, year):
         parsed = [ td.decode_contents(formatter='html').strip().replace(u'&nbsp;', '') for td in data ] #put it in lists, strip extraneous html
         parsed[1] = BeautifulSoup(parsed[1], "html.parser").text # the player name is nested.
         roster.append(parsed)
-    
-    roster = roster[7:] # remove header crap
 
-    return roster
+    # Separate headers and table data
+    num_columns = len(roster[7])
+    start_index = 8 - num_columns
+    headers = [header[0] for header in roster[start_index:7]] + ['Hometown']
+    roster = roster[7:]
+
+    # Create list of data dictionaries
+    players = []
+    for player in roster:
+        player_data = {}
+        for i, column in enumerate(headers):
+            player_data[column] = player[i]
+        players.append(player_data)
+
+    return players
+
+
+def process_column(column_name):
+    """Returns variable name-like column name.
+
+    >>> process_column("Name")
+    "name"
+
+    >>> process_column("Wt.")
+    "weight"
+
+    >>> process_column("Na.")
+    "na"
+    """
+    pass
 
 def get_schedule(sport, year):
     """Return the schedule of given year.
