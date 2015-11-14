@@ -38,3 +38,5 @@ def get_player(sport, year, name="", no=-1):
                 list_to_return.append(potential_list[i])
         index_in_list += 1
     return list_to_return
+
+print (get_player('M_Basketball', 2015, no=0))
