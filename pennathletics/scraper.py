@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import sportsdata
 
-ROSTER_URL = 'http://www.pennathletics.com/SportSelect.dbml?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
-
-GAMES_URL = 'http://www.pennathletics.com/SportSelect.dbml?SPSID={}&SPID={}&DB_OEM_ID=1700&Q_SEASON={}'
+BASE_URL = 'http://www.pennathletics.com/SportSelect.dbml'
+ROSTER_URL = BASE_URL + '?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
+GAMES_URL = BASE_URL + '?SPSID={}&SPID={}&DB_OEM_ID=1700&Q_SEASON={}'
 
 
 def scrape_roster(sport, year):
@@ -21,9 +21,11 @@ def scrape_roster(sport, year):
     info_table = parsed.find_all('table')[2].find_all('tr')
 
     for row in info_table:
-        unparsed = [row.find_all('td') for td in row][0]  # Get all table data
+        # Get all table data
+        unparsed = [row.find_all('td') for td in row][0]
+        # put it in lists, strip extraneous html
         parsed = [td.decode_contents(formatter='html').strip().replace(
-            u'&nbsp;', '') for td in unparsed]  # put it in lists, strip extraneous html
+            u'&nbsp;', '') for td in unparsed]
         # the player name is nested.
         parsed[1] = BeautifulSoup(parsed[1], "html.parser").text
         roster.append(parsed)

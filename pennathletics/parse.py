@@ -28,16 +28,17 @@ def parse_hometown(hometown_str):
 
 
 def parse_date_in_schedule(dayAndMonth, time, year):
-    """Will take in the values from the day of the Week, month, day, and year and 
-    return a python datetime object
+    """Will take in the values from the day of the Week, month, day, and year
+    and return a python datetime object
 
     >>> parse_date_in_schedule("Tue, Nov 20", "8:00 PM", 2014)
     2014-11-20 20:00:00
     """
 
-    date_object = datetime.strptime('{}{}{}{}{}{}'.format(
-        dayAndMonth[5:], " ", str(year), " ", time[0:4], time[5:7]), '%b %d %Y %I:%M%p')
+    date_format = '{} {} {}{}'.format(
+        dayAndMonth[5:],
+        year,
+        time[0:4],
+        time[5:7])
+    date_object = datetime.strptime(date_format, '%b %d %Y %I:%M%p')
     return date_object
-
-
-parse_date_in_schedule("Tue, Nov 20", "8:00 PM", 2014)

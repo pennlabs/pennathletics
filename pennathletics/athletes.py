@@ -23,7 +23,10 @@ def get_roster(sport, year):
 
 
 def get_player(sport, year, name="", no=-1):
-    """Returns players with given attributes. *Sport and Year are required"""
+    """Returns players with given attributes. *Sport and Year are required
+
+    >>> get_player('M_Basketball', 2015, no=0)
+    """
 
     potential_list = get_roster(sport, year)
     list_to_return = []
@@ -42,5 +45,3 @@ def get_player(sport, year, name="", no=-1):
             list_to_return.append(potential_list[i])
         index_in_list += 1
     return list_to_return
-
-print (get_player('M_Basketball', 2015, no=0))
