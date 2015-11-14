@@ -4,4 +4,8 @@ Python wrapper around the [Penn Athletics website](www.pennathletics.com) to eas
 
 ## License
 
-This is published under the MIT license
+This is published under the MIT license. *See LICENSE.md*.
+
+## Installation
+
+<!-- TODO -->
