@@ -132,7 +132,7 @@ def scrape_roster(sport, year):
     :param sport: string value of sport.
     :param year: 4 digit int of year.
     """
-    roster = []
+    roster     = []
     r          = requests.get(ROSTER_URL.format(SPORTS[sport]['SPID'], SPORTS[sport]['SPSID'],year))
     parsed     = BeautifulSoup(r.text, "html.parser")
     info_table = parsed.find_all('table')[2].find_all('tr')
