@@ -21,7 +21,7 @@ def parse_hometown(hometown_str):
     school
 
     >>> parse_hometown("Newport Beach, Calif. (Orange Lutheran)")
-    Home(town="Newport Beach, Calif.", school="Orange Lutheran")
+    Home(town='Newport Beach, Calif.', school='Orange Lutheran')
     """
     town, school = hometown_str.split("(")[:2]
     return Home(town[:-1], school[:-1])
@@ -32,7 +32,7 @@ def parse_date_in_schedule(dayAndMonth, time, year):
     and return a python datetime object
 
     >>> parse_date_in_schedule("Tue, Nov 20", "8:00 PM", 2014)
-    2014-11-20 20:00:00
+    datetime.datetime(2014, 11, 20, 20, 0)
     """
 
     date_format = '{} {} {}{}'.format(

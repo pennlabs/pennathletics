@@ -6,6 +6,12 @@ BASE_URL = 'http://www.pennathletics.com/SportSelect.dbml'
 ROSTER_URL = BASE_URL + '?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
 GAMES_URL = BASE_URL + '?SPSID={}&SPID={}&DB_OEM_ID=1700&Q_SEASON={}'
 
+HEADER_ABBREVS = {
+    'wt': 'weight',
+    'ht': 'height',
+    'yr': 'year',
+    'pos': 'position'
+}
 
 def scrape_roster(sport, year):
     """Returns a list of lists contianing individual player information for a team.
@@ -14,7 +20,6 @@ def scrape_roster(sport, year):
     """
 
     roster = []
-    # import pdb; pdb.set_trace()
     r = requests.get(ROSTER_URL.format(sportsdata.SPORTS[
                      sport].SPID, sportsdata.SPORTS[sport].SPSID, year))
     parsed = BeautifulSoup(r.text, "html.parser")
@@ -33,7 +38,7 @@ def scrape_roster(sport, year):
     # Separate headers and table data
     num_columns = len(roster[7])
     start_index = 8 - num_columns
-    headers = [header[0] for header in roster[start_index:7]] + ['Hometown']
+    headers = [process_column(header[0]) for header in roster[start_index:7]] + ['Hometown']
     roster = roster[7:]
 
     # Create list of data dictionaries
@@ -51,15 +56,22 @@ def process_column(column_name):
     """Returns variable name-like column name.
 
     >>> process_column("Name")
-    "name"
+    'name'
 
     >>> process_column("Wt.")
-    "weight"
+    'weight'
 
     >>> process_column("Na.")
-    "na"
+    'na'
     """
-    pass
+    if column_name[-1] == '.':
+        column_name = column_name[:-1]
+    column_name = column_name.lower()
+
+    if column_name in HEADER_ABBREVS:
+        column_name = HEADER_ABBREVS[column_name]
+
+    return column_name
 
 
 def get_schedule(sport, year):

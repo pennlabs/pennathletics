@@ -1,27 +1,54 @@
 from __future__ import print_function
+import six
+
 
 # TODO
 # create resource #
+class Resource(object):
+    """Abstract base class wrapper for a dict to give it an object interface.
 
-# TODO
-# athlete inherits from resource #
+    >>> d = {'foo': 1, 'bar': {'a': 3, 'b': 4}}
+    >>> MyResource = type('MyResource', (Resource,), {'_load': lambda: 0})
+    >>> o = MyResource(d)
+    >>> o
+    {foo : 1, bar : {a : 3, b : 4}}
+    >>> o.foo
+    1
+    >>> o["foo"]
+    1
+    >>> o.bar.a
+    3
 
+    Heavily inspired by: http://stackoverflow.com/a/6573827/577199
+    """
+    def __init__(self, d):
+        self._update(d)
 
-class Athlete(object):
-    """Class for an athlete on roster"""
+    def _update(self, data):
+        """Update the object with new data."""
+        for k, v in six.iteritems(data):
+            new_value = v
+            if isinstance(v, dict):
+                new_value = type(self)(v)
+            elif isinstance(v, list):
+                new_value = [(type(self)(e) if isinstance(e, dict) else e)
+                             for e in v]
+            setattr(self, k, new_value)
 
-    def __init__(self, no, name, pos, ht, wt, yr, hometown):
-        self.no = no
-        self.name = name
-        self.pos = pos
-        self.wt = wt
-        self.yr = yr
-        self.hometown = hometown
+    def __getattr__(self, val):
+        """Try to get an attribute. On failure, load the object in full
+        and try again."""
+        return self.__dict__[val]
 
-    @property
-    def weight(self):
-        # return ft_to_inches(self.weight)
-        pass
+    def __getitem__(self, val):
+        return self.__dict__[val]
 
     def __repr__(self):
-        return "Athlete #{}, {},".format(self.no, self.name)
+        """Make the resource appear like a dict."""
+        return '{%s}' % str(', '.join('%s : %s' % (k, repr(v)) for
+            (k, v) in six.iteritems(self.__dict__)))
+
+
+class Athlete(Resource):
+    """Class for an athlete on roster"""
+    pass
