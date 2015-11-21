@@ -13,6 +13,7 @@ HEADER_ABBREVS = {
     'pos': 'position'
 }
 
+
 def scrape_roster(sport, year):
     """Returns a list of lists contianing individual player information for a team.
     :param sport: string value of sport.
@@ -30,7 +31,7 @@ def scrape_roster(sport, year):
         unparsed = [row.find_all('td') for td in row][0]
         # put it in lists, strip extraneous html
         parsed = [td.decode_contents(formatter='html').strip().replace(
-            u'&nbsp;', '') for td in unparsed]
+            '&nbsp;', '') for td in unparsed]
         # the player name is nested.
         parsed[1] = BeautifulSoup(parsed[1], "html.parser").text
         roster.append(parsed)
@@ -46,6 +47,10 @@ def scrape_roster(sport, year):
     for player in roster:
         player_data = {}
         for i, column in enumerate(headers):
+            if '\n\t\t\t' in player[i]:
+                player[i] = player[i].replace('\n\t\t\t','')
+            elif (column == 'no' or column == 'weight') and player[i] != '':
+                player[i] = int(player[i])
             player_data[column] = player[i]
         players.append(player_data)
 
@@ -90,7 +95,7 @@ def get_schedule(sport, year):
     for row in info_table:
         data = [row.find_all('td') for td in row][0]
         parsed = [td.decode_contents(formatter="html").strip(
-        ).replace(u'&nbsp;', '') for td in data]
+        ).replace('&nbsp;', '') for td in data]
         if len(parsed) > 1:
             for i in range(0, len(parsed) - 1):
                 print (i, len(parsed))

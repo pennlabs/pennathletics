@@ -2,8 +2,6 @@ from __future__ import print_function
 import six
 
 
-# TODO
-# create resource #
 class Resource(object):
     """Abstract base class wrapper for a dict to give it an object interface.
 
