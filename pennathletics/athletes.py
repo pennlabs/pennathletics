@@ -1,5 +1,5 @@
-from models import Athlete
-import scraper as s
+from .models import Athlete
+from . import scraper as s
 
 
 def get_roster(sport, year):

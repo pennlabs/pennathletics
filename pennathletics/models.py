@@ -8,8 +8,10 @@ class Resource(object):
     >>> d = {'foo': 1, 'bar': {'a': 3, 'b': 4}}
     >>> MyResource = type('MyResource', (Resource,), {'_load': lambda: 0})
     >>> o = MyResource(d)
-    >>> o
+
+    #>>> o
     {foo : 1, bar : {a : 3, b : 4}}
+
     >>> o.foo
     1
     >>> o["foo"]

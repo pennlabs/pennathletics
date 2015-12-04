@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import sportsdata
+from . import sportsdata
 
 BASE_URL = 'http://www.pennathletics.com/SportSelect.dbml'
 ROSTER_URL = BASE_URL + '?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
