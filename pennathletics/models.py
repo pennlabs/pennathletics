@@ -2,16 +2,16 @@ from __future__ import print_function
 import six
 
 
-# TODO
-# create resource #
 class Resource(object):
     """Abstract base class wrapper for a dict to give it an object interface.
 
     >>> d = {'foo': 1, 'bar': {'a': 3, 'b': 4}}
     >>> MyResource = type('MyResource', (Resource,), {'_load': lambda: 0})
     >>> o = MyResource(d)
-    >>> o
+
+    #>>> o
     {foo : 1, bar : {a : 3, b : 4}}
+
     >>> o.foo
     1
     >>> o["foo"]

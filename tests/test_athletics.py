@@ -10,4 +10,4 @@ class TestAthletics():
         ok_(get_player("M_Basketball", 2014) != [])
 
     def test_player_number(self):
-        eq_(get_player("M_Basketball", 2013, no='1')[0].height, '6-2')
+        eq_(get_player("M_Basketball", 2013, no=1)[0].height, '6-2')
