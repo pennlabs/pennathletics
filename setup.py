@@ -12,5 +12,11 @@ setup(
     author='Adel Qalieh',
     author_email='aqalieh95@gmail.com',
     url='http://github.com/pennlabs/pennathletics',
-    license='MIT'
+    license='MIT',
+    packages=['pennathletics'],
+    install_requires=[
+        'beautifulsoup4==4.4.1',
+        'requests==2.8.1',
+        'six==1.10.0'
+    ]
 )
