@@ -1,6 +1,6 @@
 # Penn Athletics Python SDK
 
-Python wrapper around the [Penn Athletics website](www.pennathletics.com) to easily access athletics data.
+Python wrapper around the [Penn Athletics website](http://www.pennathletics.com) to easily access athletics data.
 
 ## License
 
