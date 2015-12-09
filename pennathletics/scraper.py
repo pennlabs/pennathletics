@@ -98,13 +98,14 @@ def get_schedule(sport, year):
     for row in info_table:
         data = row.find_all('td')[0:4]
         schedule = []
-        for td in data:
-            parsed = td.decode_contents(formatter="html").strip()
-            schedule.append(parsed)
-        schedule[0] = datetime.strptime(schedule[0][5:8] + " " + schedule[0][9:11] + " " + str(year) + " " + schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
-        schedule = schedule[0:3]
-        schedule[2] = schedule[2].replace("at ", "")
-        game_data.append(schedule)
+        if len(data) > 1:    
+            for td in data:
+                parsed = td.decode_contents(formatter="html").strip()
+                schedule.append(parsed)
+            schedule[0] = datetime.strptime(schedule[0][5:8] + " " + schedule[0][9:11] + " " + str(year) + " " + schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
+            schedule = schedule[0:3]
+            schedule[2] = schedule[2].replace("at ", "")
+            game_data.append(schedule)
     return game_data
 
 def get_years(sport):
