@@ -10,7 +10,7 @@ GAMES_URL = BASE_URL + '?SPSID={}&SPID={}&DB_OEM_ID=1700&Q_SEASON={}'
 HEADER_ABBREVS = {
     'wt': 'weight',
     'ht': 'height',
-    'yr': 'year',
+    'yr': 'class',
     'pos': 'position'
 }
 
@@ -52,6 +52,8 @@ def scrape_roster(sport, year):
                 player[i] = player[i].replace('\n\t\t\t','')
             elif (column == 'no' or column == 'weight') and player[i] != '':
                 player[i] = int(player[i])
+            elif column == 'class':
+                player[i] = player[i].lower().replace('.','')
             player_data[column] = player[i]
         players.append(player_data)
 
