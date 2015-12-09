@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from . import sportsdata
+from datetime import datetime
 
 BASE_URL = 'http://www.pennathletics.com/SportSelect.dbml'
 ROSTER_URL = BASE_URL + '?&DB_OEM_ID=1700&SPID={}&SPSID={}&Q_SEASON={}'
@@ -84,22 +85,42 @@ def get_schedule(sport, year):
     :param sport: string value of sport.
     :param year: 4 digitinteger value of year.
     """
-    gameData = []
+    game_data = []
     r = requests.get(
         GAMES_URL.format(sportsdata.SPORTS[sport].SPSID - 1,
                          sportsdata.SPORTS[sport].SPID,
                          year)
     )
     parsed = BeautifulSoup(r.text, "html.parser")
-    info_table = parsed.find_all('table')[0].find_all('tr')
+    info_table = parsed.find_all('table')[1].find_all('tr')
     for row in info_table:
-        data = [row.find_all('td') for td in row][0]
-        parsed = [td.decode_contents(formatter="html").strip(
-        ).replace('&nbsp;', '') for td in data]
-        if len(parsed) > 1:
-            for i in range(0, len(parsed) - 1):
-                print (i, len(parsed))
-                parsed[i] = BeautifulSoup(parsed[i]).decode_contents(
-                    formatter="html").strip()
-                gameData.append(parsed)
-    return gameData
+        data = row.find_all('td')[0:4]
+        schedule = []
+        for td in data:
+            parsed = td.decode_contents(formatter="html").strip()
+            schedule.append(parsed)
+        schedule[0] = datetime.strptime(schedule[0][5:8] + " " + schedule[0][9:11] + " " + str(year) + " " + schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
+        schedule = schedule[0:3]
+        schedule[2] = schedule[2].replace("at ", "")
+        game_data.append(schedule)
+    return game_data
+
+def get_years(sport):
+    """Return a list of all years
+    that has recorded data for the
+    sport given."""
+
+    yearData = []
+    r = requests.get(
+        ROSTER_URL.format(sportsdata.SPORTS[sport].SPID,
+                          sportsdata.SPORTS[sport].SPSID,
+                          "2015"))
+    parsed = BeautifulSoup(r.text, "html.parser")
+    data = ((parsed.findAll(id='Q_SEASON'))[0].findAll('option'))
+    years = []
+    for row in data:
+        years.append(int([row['value']][0]))
+    return years
+
+    
+
