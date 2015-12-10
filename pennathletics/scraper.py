@@ -39,8 +39,8 @@ def scrape_roster(sport, year):
 
     # Separate headers and table data
     num_columns = len(roster[7])
-    start_index = 8 - num_columns
-    headers = [process_column(header[0]) for header in roster[start_index:7]] + ['Hometown']
+    start_index = 1
+    headers = [process_column(header[0]) for header in roster[start_index:num_columns]] + ['Hometown']
     roster = roster[7:]
 
     # Create list of data dictionaries
@@ -54,6 +54,9 @@ def scrape_roster(sport, year):
                 player[i] = int(player[i])
             elif column == 'class':
                 player[i] = player[i].lower().replace('.','')
+            elif column == 'name' and '<a href' in player[i]:
+                player[i] = player[i].replace('</a>','')
+                player[i] = player[i][player[i].index('>')+1:len(player[i])]
             player_data[column] = player[i]
         players.append(player_data)
 
