@@ -15,7 +15,8 @@ Setup
 
 ## Sports
 
-### View All Sports
+<span name="ids"></span>
+### View All Sports (IDs)
 <table>
 <tr>
 <td>URL</td>
@@ -27,6 +28,7 @@ Setup
 </tr>
 </table>
 
+<span name="years"></span>
 ### View Available Years
 <table>
 <tr>
@@ -39,7 +41,7 @@ Setup
 </tr>
 <tr>
 <td>Current Sport ID's</td>
-<td>'M_Baseball', 'M_Basketball', 'M_Track_Cross', 'M_Fencing', 'M_Football', 'M_Sprint_Football', 'M_Golf', 'M_Lacrosse', 'M_Heavy_Rowing', 'M_Light_Rowing', 'M_Soccer', 'M_Squash', 'M_Swimming', 'M_Tennis', 'M_Wrestling', 'W_Basketball', 'W_Track_Cross', 'W_Fencing', 'W_Hockey', 'W_Golf', 'W_Gymnastics', 'W_Lacrosse', 'W_Rowing', 'W_Soccer', 'W_Softball', 'W_Squash', 'W_Swimming', 'W_Tennis', 'W_Volleyball'</td>
+<td><a href="#ids">View Section on Sport IDs</a></td>
 </tr>
 <tr>
 <td>Response Formats</td>
@@ -62,11 +64,11 @@ Setup
 </tr>
 <tr>
 <td>Current Sport ID's</td>
-<td>'M_Baseball', 'M_Basketball', 'M_Track_Cross', 'M_Fencing', 'M_Football', 'M_Sprint_Football', 'M_Golf', 'M_Lacrosse', 'M_Heavy_Rowing', 'M_Light_Rowing', 'M_Soccer', 'M_Squash', 'M_Swimming', 'M_Tennis', 'M_Wrestling', 'W_Basketball', 'W_Track_Cross', 'W_Fencing', 'W_Hockey', 'W_Golf', 'W_Gymnastics', 'W_Lacrosse', 'W_Rowing', 'W_Soccer', 'W_Softball', 'W_Squash', 'W_Swimming', 'W_Tennis', 'W_Volleyball'</td>
+<td><a href="#ids">View Section on Sport IDs</a></td>
 </tr>
 <tr>
 <td>Supported Years</td>
-<td>Refer to Section on Years</td>
+<td><a href="#years">View Section on years</a></td>
 </tr>
 <tr>
 <td>Response Formats</td>
@@ -87,11 +89,11 @@ Setup
 </tr>
 <tr>
 <td>Current Sport ID's</td>
-<td>'M_Baseball', 'M_Basketball', 'M_Track_Cross', 'M_Fencing', 'M_Football', 'M_Sprint_Football', 'M_Golf', 'M_Lacrosse', 'M_Heavy_Rowing', 'M_Light_Rowing', 'M_Soccer', 'M_Squash', 'M_Swimming', 'M_Tennis', 'M_Wrestling', 'W_Basketball', 'W_Track_Cross', 'W_Fencing', 'W_Hockey', 'W_Golf', 'W_Gymnastics', 'W_Lacrosse', 'W_Rowing', 'W_Soccer', 'W_Softball', 'W_Squash', 'W_Swimming', 'W_Tennis', 'W_Volleyball'</td>
+<td><a href="#ids">View Section on Sport IDs</a></td>
 </tr>
 <tr>
 <td>Supported Years</td>
-<td>Refer to Section on Years</td>
+<td><a href="#years">View Section on years</a></td>
 </tr>
 <tr>
 <td>Parameters</td>
@@ -118,11 +120,11 @@ Setup
 </tr>
 <tr>
 <td>Current Sport ID's</td>
-<td>'M_Baseball', 'M_Basketball', 'M_Track_Cross', 'M_Fencing', 'M_Football', 'M_Sprint_Football', 'M_Golf', 'M_Lacrosse', 'M_Heavy_Rowing', 'M_Light_Rowing', 'M_Soccer', 'M_Squash', 'M_Swimming', 'M_Tennis', 'M_Wrestling', 'W_Basketball', 'W_Track_Cross', 'W_Fencing', 'W_Hockey', 'W_Golf', 'W_Gymnastics', 'W_Lacrosse', 'W_Rowing', 'W_Soccer', 'W_Softball', 'W_Squash', 'W_Swimming', 'W_Tennis', 'W_Volleyball'</td>
+<td><a href="#ids">View Section on Sport IDs</a></td>
 </tr>
 <tr>
 <td>Supported Years</td>
-<td>Refer to Section on Years</td>
+<td><a href="#years">View Section on years</a></td>
 </tr>
 <tr>
 <td>Response Formats</td>
