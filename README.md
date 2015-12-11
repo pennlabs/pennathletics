@@ -6,15 +6,6 @@ Python wrapper around the [Penn Athletics website](http://www.pennathletics.com)
 
 This is published under the MIT license. See [LICENSE](LICENSE).
 
-## Installation
-
-<!-- TODO -->
-
-Penn Althetics API
-==================
-
-Redis-backed server intended for internal use at Penn Labs and external use by the Penn community to retrieve athelete information quickly and easily.
-
 Setup
 -----
 * Install [redis](http://redis.io/)
