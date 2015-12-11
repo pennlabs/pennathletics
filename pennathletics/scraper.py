@@ -40,7 +40,8 @@ def scrape_roster(sport, year):
     # Separate headers and table data
     num_columns = len(roster[7])
     start_index = 1
-    headers = [process_column(header[0]) for header in roster[start_index:num_columns]] + ['Hometown']
+    headers = [process_column(header[0]) for header in 
+            roster[start_index:num_columns]] + ['Hometown']
     roster = roster[7:]
 
     # Create list of data dictionaries
@@ -105,7 +106,9 @@ def get_schedule(sport, year):
             for td in data:
                 parsed = td.decode_contents(formatter="html").strip()
                 schedule.append(parsed)
-            schedule[0] = datetime.strptime(schedule[0][5:8] + " " + schedule[0][9:11] + " " + str(year) + " " + schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
+            schedule[0] = datetime.strptime(schedule[0][5:8] + " " +
+                          schedule[0][9:11] + " " + str(year) + " " +
+                          schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
             schedule = schedule[0:3]
             schedule[2] = schedule[2].replace("at ", "")
             game_data.append(schedule)
