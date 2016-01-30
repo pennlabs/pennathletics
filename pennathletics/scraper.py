@@ -30,7 +30,7 @@ def scrape_roster(sport, year):
     for row in info_table:
         # Get all table data
         unparsed = [row.find_all('td') for td in row][0]
-        # put it in lists, strip extraneous html
+        # put in lists, strip extraneous html
         parsed = [td.decode_contents(formatter='html').strip().replace(
             '&nbsp;', '') for td in unparsed]
         # the player name is nested.
