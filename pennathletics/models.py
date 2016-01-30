@@ -3,6 +3,7 @@ import six
 
 
 class Resource(object):
+
     """Abstract base class wrapper for a dict to give it an object interface.
 
     >>> d = {'foo': 1, 'bar': {'a': 3, 'b': 4}}
@@ -21,6 +22,7 @@ class Resource(object):
 
     Heavily inspired by: http://stackoverflow.com/a/6573827/577199
     """
+
     def __init__(self, d):
         self._update(d)
 
@@ -46,9 +48,10 @@ class Resource(object):
     def __repr__(self):
         """Make the resource appear like a dict."""
         return '{%s}' % str(', '.join('%s : %s' % (k, repr(v)) for
-            (k, v) in six.iteritems(self.__dict__)))
+                                      (k, v) in six.iteritems(self.__dict__)))
 
 
 class Athlete(Resource):
+
     """Class for an athlete on roster"""
     pass

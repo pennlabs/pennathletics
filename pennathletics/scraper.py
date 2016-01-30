@@ -40,8 +40,8 @@ def scrape_roster(sport, year):
     # Separate headers and table data
     num_columns = len(roster[7])
     start_index = 1
-    headers = [process_column(header[0]) for header in 
-            roster[start_index:num_columns]] + ['Hometown']
+    headers = [process_column(header[0]) for header in
+               roster[start_index:num_columns]] + ['Hometown']
     roster = roster[7:]
 
     # Create list of data dictionaries
@@ -50,14 +50,14 @@ def scrape_roster(sport, year):
         player_data = {}
         for i, column in enumerate(headers):
             if '\n\t\t\t' in player[i]:
-                player[i] = player[i].replace('\n\t\t\t','')
+                player[i] = player[i].replace('\n\t\t\t', '')
             elif (column == 'no' or column == 'weight') and player[i] != '':
                 player[i] = int(player[i])
             elif column == 'class':
-                player[i] = player[i].lower().replace('.','')
+                player[i] = player[i].lower().replace('.', '')
             elif column == 'name' and '<a href' in player[i]:
-                player[i] = player[i].replace('</a>','')
-                player[i] = player[i][player[i].index('>')+1:len(player[i])]
+                player[i] = player[i].replace('</a>', '')
+                player[i] = player[i][player[i].index('>') + 1:len(player[i])]
             player_data[column] = player[i]
         players.append(player_data)
 
@@ -102,17 +102,18 @@ def get_schedule(sport, year):
     for row in info_table:
         data = row.find_all('td')[0:4]
         schedule = []
-        if len(data) > 1:    
+        if len(data) > 1:
             for td in data:
                 parsed = td.decode_contents(formatter="html").strip()
                 schedule.append(parsed)
             schedule[0] = datetime.strptime(schedule[0][5:8] + " " +
-                          schedule[0][9:11] + " " + str(year) + " " +
-                          schedule[3].replace(" ",""), "%b %d %Y %I:%M%p")
+                                            schedule[0][9:11] + " " + str(year) + " " +
+                                            schedule[3].replace(" ", ""), "%b %d %Y %I:%M%p")
             schedule = schedule[0:3]
             schedule[2] = schedule[2].replace("at ", "")
             game_data.append(schedule)
     return game_data
+
 
 def get_years(sport):
     """Return a list of all years
@@ -130,6 +131,3 @@ def get_years(sport):
     for row in data:
         years.append(int([row['value']][0]))
     return years
-
-    
-
