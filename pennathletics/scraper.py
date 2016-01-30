@@ -34,7 +34,6 @@ def scrape_roster(sport, year):
         parsed = [td.decode_contents(formatter='html').strip().replace(
             '&nbsp;', '') for td in unparsed]
         # the player name is nested.
-        parsed[1] = BeautifulSoup(parsed[1], "html.parser").text
         roster.append(parsed)
 
     # Separate headers and table data
