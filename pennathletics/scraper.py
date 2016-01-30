@@ -17,7 +17,7 @@ HEADER_ABBREVS = {
 
 def scrape_roster(sport, year):
     """Returns a list of lists contianing individual player information for a team.
-    :param sport: string value of sport.
+    :param sport: string value of the sport.
     :param year: 4 digit int of year.
     """
 
