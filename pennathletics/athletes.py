@@ -1,4 +1,4 @@
-from .models import Athlete
+from . models import Athlete
 from . import scraper as s
 
 

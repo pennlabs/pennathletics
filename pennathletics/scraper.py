@@ -25,6 +25,10 @@ def scrape_roster(sport, year):
     r = requests.get(ROSTER_URL.format(sportsdata.SPORTS[
                      sport].SPID, sportsdata.SPORTS[sport].SPSID, year))
     parsed = BeautifulSoup(r.text, "html.parser")
+    
+    if "No Roster" in r.text:
+        return []
+    
     info_table = parsed.find_all('table')[2].find_all('tr')
 
     for row in info_table:
