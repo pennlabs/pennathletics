@@ -27,7 +27,7 @@ def parse_hometown(hometown_str):
     return Home(town[:-1], school[:-1])
 
 
-def parse_date_in_schedule(dayAndMonth, time, year):
+def parse_date_in_schedule(day_and_month, time, year):
     """Will take in the values from the day of the Week, month, day, and year
     and return a python datetime object
 
@@ -36,7 +36,7 @@ def parse_date_in_schedule(dayAndMonth, time, year):
     """
 
     date_format = '{} {} {}{}'.format(
-        dayAndMonth[5:],
+        day_and_month[5:],
         year,
         time[0:4],
         time[5:7])
