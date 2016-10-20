@@ -2,16 +2,17 @@
 
 Python wrapper around the [Penn Athletics website](http://www.pennathletics.com) to easily access athletics data.
 
+**Note:** This SDK is currently broken due to a website refresh. Stay tuned!
+
 ## License
 
 This is published under the MIT license. See [LICENSE](LICENSE).
 
 Setup
 -----
-* Install [redis](http://redis.io/)
 * Create new virtualenv
-* Install requirments using 'pip install -r requirements.txt'
-* Run the penn athletics API server using 'python runserver.py'
+* Install requirements using 'pip install -r requirements.txt'
+* Run the Penn Athletics API server using 'python runserver.py'
 
 ## Sports
 
@@ -131,4 +132,3 @@ Setup
 <td>JSON</td>
 </tr>
 </table>
-
