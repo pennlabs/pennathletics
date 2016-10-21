@@ -15,8 +15,8 @@ def get_roster(sport, year):
 def get_player(sport, year, **kwargs):
     """Returns players with given attributes. *Sport and Year are required
 
-    >>> int(get_player('m-baskbl', 2015, jersey=0)[0].weight)
-    225 lbs
+    >>> get_player('m-baskbl', 2015, jersey=0)[0].rawWeight
+    225.0
     """
     potential_list = get_roster(sport, year)
     list_to_return = []
