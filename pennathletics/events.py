@@ -1,10 +1,11 @@
 from munch import munchify
 import requests
 import arrow
+from . import BASE_URL
 
-EVENTS_URL = ("http://www.pennathletics.com/v3/events?page=1&limit=40"
-              "&timezone=America/New_York&sort_direction=ASC"
-              "&sub_types=SportEvent,MediaEvent&sort=eventDate&start_date={}")
+EVENTS_URL = (BASE_URL + "/events?page=1&limit=40&timezone=America/New_York"
+              "&sort_direction=ASC&sub_types=SportEvent,MediaEvent"
+              "&sort=eventDate&start_date={}")
 
 
 def events():
