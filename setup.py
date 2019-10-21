@@ -16,7 +16,7 @@ setup(
     packages=['pennathletics'],
     install_requires=[
         'beautifulsoup4==4.4.1',
-        'requests==2.8.1',
+        'requests==2.20.0',
         'six==1.10.0'
     ]
 )
